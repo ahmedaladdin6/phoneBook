@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsersService } from './shared/services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'phoneBook';
+  constructor( private serv : UsersService){
+    this.serv.getUsers().subscribe(res=>{
+      console.log(res)
+    })
+  }
 }
