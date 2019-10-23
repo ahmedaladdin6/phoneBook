@@ -8,9 +8,6 @@ import { UsersService } from './shared/services/users.service';
 })
 export class AppComponent {
   title = 'phoneBook';
-  constructor( private serv : UsersService){
-    this.serv.getUsers().subscribe(res=>{
-      console.log(res)
-    })
-  }
+  constructor(){}
+   
 }
