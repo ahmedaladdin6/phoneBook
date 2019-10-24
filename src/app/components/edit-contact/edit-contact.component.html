@@ -3,7 +3,7 @@
   <form [formGroup]="contactForm" (ngSubmit)="onSubmit();openSnackBar()">
     <img [src]="url" height="150" width="150"> <br />
     <mat-form-field>
-      <input matInput placeholder="Name" formControlName="name" minlength="3">
+      <input matInput placeholder="Name" formControlName="name" minlength="3" required>
       <mat-error *ngIf="name.hasError('required')">
         Name is <strong>required</strong>
       </mat-error>
@@ -12,12 +12,15 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone" formControlName="phone" minlength="5" (keypress)=" takeNumberOnly($event)">
+      <input matInput placeholder="Phone" formControlName="phone" minlength="10" maxlength="10" (keypress)=" takeNumberOnly($event)" required uniqueNumber>
       <mat-error *ngIf="phone.hasError('required')">
         phone is <strong>required </strong>and containe number only
       </mat-error>
       <mat-error *ngIf="phone.hasError('minlength')">
-        phone is at least <strong>5 number</strong>
+        phone  must contain  <strong>10 number</strong>
+      </mat-error>
+      <mat-error *ngIf="phone.hasError('uniqueNumber')">
+        phone is already exist
       </mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit" class="btn btn-success" [disabled]="!contactForm.valid">Update</button>
