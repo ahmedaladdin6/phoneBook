@@ -1,8 +1,8 @@
 .container{
     padding:20px;
-    border:1px solid rgb(221, 221, 221);
+    background-color: rgb(253, 253, 253);;
     width:60%;
-    margin:auto;
+    margin:100px auto;
     div.group-search{
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -45,7 +45,7 @@
    }
   .table-container{
     table {
-        width: 98%;
+        width: 100%;
         tr.mat-header-row{
             display: none;
         }

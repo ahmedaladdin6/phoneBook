@@ -1,3 +1,20 @@
-<p>
-  add-contacts works!
-</p>
+<div class="container">
+  <h2>Add New Contact</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <img [src]="url"  height="150"width="150"> <br/>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="name.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone" formControlName="phone">
+      <mat-error *ngIf="phone.hasError('required')">
+        phone is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" class="btn btn-success" [disabled]="!contactForm.valid">ِAdd Contact</button>
+    <button mat-raised-button color="accent" type="button" class="btn btn-primary" (click)="onCancel()">cancel</button>
+  </form>
+</div>
