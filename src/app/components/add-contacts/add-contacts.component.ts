@@ -35,6 +35,9 @@ export class AddContactsComponent implements OnInit {
       duration: 2000,
     });
   }
+  uniqueValidator(){
+
+  }
 
   takeNumberOnly(event) {
     var charCode = (event.which) ? event.which : event.keyCode

@@ -12,6 +12,8 @@ import { EditContactComponent } from './components/edit-contact/edit-contact.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnackBarComponent } from './shared/alert/snack-bar/snack-bar.component';
 import { DeleteDialogComponent } from './shared/alert/delete-dialog/delete-dialog.component';
+import { UniqueValidatorDirective } from './shared/validators/unique-validator.directive';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { DeleteDialogComponent } from './shared/alert/delete-dialog/delete-dialo
     EditContactComponent,
     SnackBarComponent,
     DeleteDialogComponent,
-    
+     UniqueValidatorDirective
   ],
   imports: [
     BrowserModule,
