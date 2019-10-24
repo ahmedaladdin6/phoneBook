@@ -2,6 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { MatSnackBar } from '@angular/material';
+import { SnackBarComponent } from 'src/app/shared/alert/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-add-contacts',
@@ -9,10 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-contacts.component.scss']
 })
 export class AddContactsComponent implements OnInit {
-  obj: any = {};
+ 
+  constructor(private router: Router,private userService:UsersService,private _snackBar: MatSnackBar) { }
+
   contactForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required,Validators.minLength(3)]),
+    phone: new FormControl('', [Validators.required,Validators.minLength(5)]),
   });
   url: any = 'assets/default.jpg';
   get name() {
@@ -21,26 +26,29 @@ export class AddContactsComponent implements OnInit {
   get phone() {
     return this.contactForm.get('phone');
   }
- 
-
-  constructor(private router: Router) { }
-
   ngOnInit() {
 
 
   }
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackBarComponent,{
+      duration:5000,
+    });
+  }
+
+   takeNumberOnly(event){
+    var charCode = (event.which) ? event.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
   onSubmit() {
-    // this.obj = {
-       
-    //   'name':  this.contactForm.value.firstName.toUpperCase(),
-    //   'phone': this.contactForm.value.phone,
-    // }
-    // localStorage.setItem('myObj', JSON.stringify(this.obj));
-
-
-
-
-
+    let name =this.contactForm.value.name;
+    let phone =this.contactForm.value.phone
+    let payload ={"name":name.charAt(0).toUpperCase()+name.substring(1),"phone":phone};
+    this.userService.addUser(payload).subscribe(result=>{
+      console.log(result)
+    })
     this.router.navigate(['/'])
   }
   onCancel() {

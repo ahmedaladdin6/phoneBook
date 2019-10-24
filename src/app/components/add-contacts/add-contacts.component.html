@@ -1,17 +1,23 @@
 <div class="container">
   <h2>Add New Contact</h2>
-  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit();openSnackBar()">
     <img [src]="url"  height="150"width="150"> <br/>
     <mat-form-field>
-      <input matInput placeholder="Name" formControlName="name">
+      <input matInput placeholder="Name" formControlName="name"minlength="3">
       <mat-error *ngIf="name.hasError('required')">
         Name is <strong>required</strong>
       </mat-error>
+      <mat-error *ngIf="name.hasError('minlength')">
+        Name is at least <strong>' 3 characters'</strong> 
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Phone" formControlName="phone">
+      <input matInput placeholder="Phone" formControlName="phone" minlength="5"(keypress)=" takeNumberOnly($event)">
       <mat-error *ngIf="phone.hasError('required')">
-        phone is <strong>required</strong>
+        phone is <strong>required </strong>and containe number only
+      </mat-error>
+      <mat-error *ngIf="phone.hasError('minlength')">
+        phone is at least <strong>5 number</strong>
       </mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit" class="btn btn-success" [disabled]="!contactForm.valid">ِAdd Contact</button>

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import Swal from 'sweetalert2'
-
 import * as _ from 'lodash';
 import { UsersService } from 'src/app/shared/services/users.service';
 
@@ -14,29 +13,28 @@ import { UsersService } from 'src/app/shared/services/users.service';
 })
 export class ContactsComponent implements OnInit {
   imgUrl = 'assets/default.jpg';
-  contacts:any={};
+  arrOfLetters=[];
+  contacts=[];
   displayedColumns: string[] = ['contact','status'];
-  // letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  // dataSource = new MatTableDataSource(this.contacts);
   dataSource;
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  constructor(private router: Router,private userService: UsersService) {
+  
 
-
-  }
+  constructor(private router: Router,private userService: UsersService) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+   this.arrOfLetters = new Array(26).fill(1).map((_,i)=>String.fromCharCode(65+i))
      this.userService.getUsers().subscribe(result=>{
-       this.dataSource=result;
-       console.log('cc',this.dataSource)
+       this.contacts.push(result);
+       this.contacts.map(elements=>{
+        this.dataSource = new MatTableDataSource(elements);
+        this.dataSource.data = _.orderBy(this.dataSource.data, ['name'], ['asc']);
+       })
      })
-    
-    
-   
 
+    
+     console.log(this.arrOfLetters)
+    //  
     // this.dataSource.data.map((res: any) => {
     //   if (res.firstName != null && res.lastName != null) {
     //     res.firstName = res.firstName.toUpperCase();
@@ -46,98 +44,123 @@ export class ContactsComponent implements OnInit {
     //   }
 
     // })
-    // this.dataSource.data.push(this.myFinalContact);
-    // this.dataSource.data = _.orderBy(this.dataSource.data, ['firstName'], ['asc']);
+  
+   
 
 
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   addContact() {
     this.router.navigate(['/addContact']);
-    // console.log('serv',this.contentAddService.data)
-  }
-  letterClicked(l) {
-
-    if (l === 'A') {
-      window.scrollTo(0, 0);
-
-    }
-    else if (l === 'B') {
-      window.scrollTo(0, 2000);
-    }
-    else if (l === 'C') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-    }
-    else if (l === 'D') {
-      window.scrollTo(0, 2165);
-    }
-    else if (l === 'E') {
-      window.scrollTo(0, 2350);
-    }
-    else if (l === 'F') {
-      window.scrollTo(0, 2620);
-    }
-    else if (l === 'G') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-    }
-    else if (l === 'H') {
-      window.scrollTo(0, 2895);
-    }
-    else if (l === 'I') {
-      window.scrollTo(0, 2985);
-    }
-    else if (l === 'J') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'K') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'L') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'M') {
-      window.scrollTo(0, 3165);
-
-    } else if (l === 'N') {
-      window.scrollTo(0, 4620);
-
-    } else if (l === 'O') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'P') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'Q') {
-      Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
-
-    } else if (l === 'R') {
-      window.scrollTo(0, 4980);
-
-    } else if (l === 'S') {
-      window.scrollTo(0, 5158);
-
-    } else if (l === 'T') {
-      window.scrollTo(0, 5300);
-
-    } else if (l === 'U') {
-      // window.scrollTo(0 , 0);
-
-    } else if (l === 'V') {
-      // window.scrollTo(0 , 0);
-
-    } else if (l === 'W') {
-      // window.scrollTo(0 , 0);
-
-    } else if (l === 'X') {
-      // window.scrollTo(0 , 0);
-
-    } else if (l === 'Y') {
-      // window.scrollTo(0 , 0);
-
-    } else if (l === 'Z') {
-      // window.scrollTo(0 , 0);
-
-    }
   }
 
+  letterClicked(l){
+    switch (l) {
+      case l = 'A':
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'B':
+        window.scrollTo({
+          top: 600,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'C':
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'D':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'E':
+        window.scrollTo({
+          top: 700,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'F':
+        window.scrollTo({
+          top: 800,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'G':
+        window.scrollTo({
+          top: 1110,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'H':
+        window.scrollTo({
+          top: 1200,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'I':
+        window.scrollTo({
+          top: 1350,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'J':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'K':
+        window.scrollTo({
+          top: 1450,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'L':
+        window.scrollTo({
+          top: 1550,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'M':
+        window.scrollTo({
+          top: 1650,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'N':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'O':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'P':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+      case l = 'Q':
+        window.scrollTo({
+          top: 2120,
+          behavior: 'smooth',
+        });
+        break;
+      case l = 'R':
+          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        break;
+        case l = 'S':
+        window.scrollTo({
+          top: 2400,
+          behavior: 'smooth',
+        });
+        break;
+        case l = 'W':
+        window.scrollTo({
+          top: 2600,
+          behavior: 'smooth',
+        });
+        break;
+        default:
+            Swal.fire('Character not found', '', 'warning')
+
+    }
+  }
 
 }

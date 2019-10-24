@@ -10,13 +10,16 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { AddContactsComponent } from './components/add-contacts/add-contacts.component';
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SnackBarComponent } from './shared/alert/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsComponent,
     AddContactsComponent,
-    EditContactComponent
+    EditContactComponent,
+    SnackBarComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppMaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SnackBarComponent] 
 })
 export class AppModule { }

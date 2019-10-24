@@ -1,3 +1,4 @@
+$iconColor :#FF0073;
 .container{
     padding:20px;
     background-color: rgb(253, 253, 253);;
@@ -43,6 +44,24 @@
            font-weight: bolder;
        }
    }
+   div.letters{
+       position: sticky;
+       top:135px;
+       background-color: #F8F8F8;
+       padding:15px;
+
+       ul{
+           list-style-type: none;
+           text-align: center;
+       }
+       li{
+           display: inline;
+           letter-spacing: 10px;
+           line-height: 30px;
+           cursor: pointer;
+           
+       }
+   }
   .table-container{
     table {
         width: 100%;
@@ -64,7 +83,7 @@
         .btn-status{
             text-align: end;
             mat-icon{
-                color:#FF0073;
+                color: $iconColor;
                 cursor: pointer;
             }
         }

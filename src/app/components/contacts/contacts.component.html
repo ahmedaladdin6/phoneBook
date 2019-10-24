@@ -1,7 +1,7 @@
 <div class="container">
   <div class="group-search">
     <i class="material-icons">search</i>
-    <input class="form-control Search" type="text" (keyup)="applyFilter($event.target.value)"
+    <input matInput class="form-control Search"(keyup)="applyFilter($event.target.value)"
       placeholder=" Search contact">
   </div>
   <div class="addContact flex-content-between">
@@ -9,6 +9,13 @@
     <button mat-fab (click)="addContact()">
       <mat-icon>add</mat-icon>
     </button>
+  </div>
+  <div class="letters">
+    <ul>
+      <li *ngFor="let letter of arrOfLetters" (click)="letterClicked(letter)">
+          {{letter}}
+      </li>
+    </ul>
   </div>
   <div class="table-container">
     <table mat-table [dataSource]="dataSource">
