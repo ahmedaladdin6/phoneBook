@@ -1,3 +1,26 @@
-<p>
-  edit-contact works!
-</p>
+<div class="container">
+  <h2>Edit Contact <i class="material-icons"> create  </i></h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit();openSnackBar()">
+    <img [src]="url" height="150" width="150"> <br />
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" minlength="3">
+      <mat-error *ngIf="name.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="name.hasError('minlength')">
+        Name is at least <strong>' 3 characters'</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone" formControlName="phone" minlength="5" (keypress)=" takeNumberOnly($event)">
+      <mat-error *ngIf="phone.hasError('required')">
+        phone is <strong>required </strong>and containe number only
+      </mat-error>
+      <mat-error *ngIf="phone.hasError('minlength')">
+        phone is at least <strong>5 number</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" class="btn btn-success" [disabled]="!contactForm.valid">Update</button>
+    <button mat-raised-button color="accent" type="button" class="btn btn-primary" (click)="onCancel()">cancel</button>
+  </form>
+</div>

@@ -1,0 +1,28 @@
+$mainColor: #A1A1A1;
+.container{
+    border:1px solid $mainColor;
+    background-color:#fff;
+    padding:30px;
+    width:60%;
+    margin:100px auto;
+  form{
+    margin-top:3%;
+    img{
+      margin: 0% auto;  
+      display: block;
+      border:1px solid $mainColor;
+      border-radius: 80px;
+    }
+    mat-form-field{
+        display: block;
+        margin-top:20px;
+    }
+    button{
+        display: block;
+        width:200px;
+        margin: 3% auto;
+        border-radius: 10px;
+    }
+  }
+    
+}
