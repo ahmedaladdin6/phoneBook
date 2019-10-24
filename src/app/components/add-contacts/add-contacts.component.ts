@@ -12,12 +12,12 @@ import { SnackBarComponent } from 'src/app/shared/alert/snack-bar/snack-bar.comp
   styleUrls: ['./add-contacts.component.scss']
 })
 export class AddContactsComponent implements OnInit {
- 
-  constructor(private router: Router,private userService:UsersService,private _snackBar: MatSnackBar) { }
+
+  constructor(private router: Router, private userService: UsersService, private _snackBar: MatSnackBar) { }
 
   contactForm = new FormGroup({
-    name: new FormControl('', [Validators.required,Validators.minLength(3)]),
-    phone: new FormControl('', [Validators.required,Validators.minLength(5)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(5)]),
   });
   url: any = 'assets/default.jpg';
   get name() {
@@ -31,23 +31,22 @@ export class AddContactsComponent implements OnInit {
 
   }
   openSnackBar() {
-    this._snackBar.openFromComponent(SnackBarComponent,{
-      duration:5000,
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: 2000,
     });
   }
 
-   takeNumberOnly(event){
+  takeNumberOnly(event) {
     var charCode = (event.which) ? event.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
+      return false;
     return true;
-}
+  }
   onSubmit() {
-    let name =this.contactForm.value.name;
-    let phone =this.contactForm.value.phone
-    let payload ={"name":name.charAt(0).toUpperCase()+name.substring(1),"phone":phone};
-    this.userService.addUser(payload).subscribe(result=>{
-      console.log(result)
+    let name = this.contactForm.value.name;
+    let phone = this.contactForm.value.phone
+    let payload = { "name": name.charAt(0).toUpperCase() + name.substring(1), "phone": phone };
+    this.userService.addUser(payload).subscribe(result => {
     })
     this.router.navigate(['/'])
   }

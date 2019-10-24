@@ -1,10 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import Swal from 'sweetalert2'
 import * as _ from 'lodash';
 import { UsersService } from 'src/app/shared/services/users.service';
+import { DeleteDialogComponent } from 'src/app/shared/alert/delete-dialog/delete-dialog.component';
+import { elementAttribute } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-contact',
@@ -13,50 +15,45 @@ import { UsersService } from 'src/app/shared/services/users.service';
 })
 export class ContactsComponent implements OnInit {
   imgUrl = 'assets/default.jpg';
-  arrOfLetters=[];
-  contacts=[];
-  displayedColumns: string[] = ['contact','status'];
+  arrOfLetters = [];
+  contacts = [];
+  displayedColumns: string[] = ['contact', 'status'];
   dataSource;
-  
 
-  constructor(private router: Router,private userService: UsersService) { }
+
+  constructor(private router: Router, private userService: UsersService, public dialog: MatDialog) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
-   this.arrOfLetters = new Array(26).fill(1).map((_,i)=>String.fromCharCode(65+i))
-     this.userService.getUsers().subscribe(result=>{
-       this.contacts.push(result);
-       this.contacts.map(elements=>{
+    this.arrOfLetters = new Array(26).fill(1).map((_, i) => String.fromCharCode(65 + i))
+    this.userService.getUsers().subscribe(result => {
+      this.contacts.push(result);
+      this.contacts.map(elements => {
         this.dataSource = new MatTableDataSource(elements);
         this.dataSource.data = _.orderBy(this.dataSource.data, ['name'], ['asc']);
-       })
-     })
-
-    
-     console.log(this.arrOfLetters)
-    //  
-    // this.dataSource.data.map((res: any) => {
-    //   if (res.firstName != null && res.lastName != null) {
-    //     res.firstName = res.firstName.toUpperCase();
-    //     res.lastName = res.lastName.toUpperCase();
-        
-
-    //   }
-
-    // })
-  
-   
-
-
+      })
+    })
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   addContact() {
     this.router.navigate(['/addContact']);
   }
 
-  letterClicked(l){
+  openDeleteDialog(element) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '365px',
+      data: { id: element.id, name: element.name, phone: element.phone }
+    });
+    dialogRef.afterClosed().subscribe(itemDeleted => {
+      _.pullAllBy(this.dataSource.data, itemDeleted, 'id');
+      this.dataSource = new MatTableDataSource(this.dataSource.data);
+    })
+  }
+
+  letterClicked(l) {
     switch (l) {
       case l = 'A':
         window.scrollTo({
@@ -74,7 +71,7 @@ export class ContactsComponent implements OnInit {
         Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'D':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'E':
         window.scrollTo({
@@ -107,7 +104,7 @@ export class ContactsComponent implements OnInit {
         });
         break;
       case l = 'J':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'K':
         window.scrollTo({
@@ -128,13 +125,13 @@ export class ContactsComponent implements OnInit {
         });
         break;
       case l = 'N':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'O':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'P':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
       case l = 'Q':
         window.scrollTo({
@@ -143,22 +140,22 @@ export class ContactsComponent implements OnInit {
         });
         break;
       case l = 'R':
-          Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
+        Swal.fire('"' + l + '" ' + 'Character not found', '', 'warning')
         break;
-        case l = 'S':
+      case l = 'S':
         window.scrollTo({
           top: 2400,
           behavior: 'smooth',
         });
         break;
-        case l = 'W':
+      case l = 'W':
         window.scrollTo({
           top: 2600,
           behavior: 'smooth',
         });
         break;
-        default:
-            Swal.fire('Character not found', '', 'warning')
+      default:
+        Swal.fire('Character not found', '', 'warning')
 
     }
   }

@@ -1,0 +1,9 @@
+<div>
+    <span> Do You want to delete This Contact ?</span>
+    <i class="material-icons"> warning </i>
+</div>
+<div>
+    <button mat-raised-button color="warn" [mat-dialog-close]="contactsAfterDeleteItem" cdkFocusInitial
+        (click)="onDelete();openSnackBar()">ِDelete</button>
+    <button mat-raised-button class="success" (click)="onCancel()">Cancel</button>
+</div>

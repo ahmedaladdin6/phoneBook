@@ -1,4 +1,4 @@
-$iconColor :#FF0073;
+
 .container{
     padding:20px;
     background-color: rgb(253, 253, 253);;
@@ -43,6 +43,7 @@ $iconColor :#FF0073;
            padding: 15px 0px;
            font-weight: bolder;
        }
+     
    }
    div.letters{
        position: sticky;
@@ -82,9 +83,11 @@ $iconColor :#FF0073;
         }
         .btn-status{
             text-align: end;
-            mat-icon{
-                color: $iconColor;
+            mat-icon {
                 cursor: pointer;
+            }
+            mat-icon.success{
+                color:rgb(12, 82, 12)
             }
         }
     }

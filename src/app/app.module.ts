@@ -11,6 +11,7 @@ import { AddContactsComponent } from './components/add-contacts/add-contacts.com
 import { EditContactComponent } from './components/edit-contact/edit-contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnackBarComponent } from './shared/alert/snack-bar/snack-bar.component';
+import { DeleteDialogComponent } from './shared/alert/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SnackBarComponent } from './shared/alert/snack-bar/snack-bar.component'
     AddContactsComponent,
     EditContactComponent,
     SnackBarComponent,
+    DeleteDialogComponent,
     
   ],
   imports: [
@@ -34,6 +36,6 @@ import { SnackBarComponent } from './shared/alert/snack-bar/snack-bar.component'
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SnackBarComponent] 
+  entryComponents: [SnackBarComponent,DeleteDialogComponent] 
 })
 export class AppModule { }
